@@ -13,19 +13,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G970F,G973F,G975F", "N975F" ]
+        model: ["G970F,G973F,G975F", "N975F"]
 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
+          python-version: "3.7"
 
       - name: Install dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
         run: sudo apt-get install -y -qq libtinfo5 ccache
-
 
       - name: Disable compression in ccache and set ccache path
         run: ccache -o compression=false -o cache_dir=$HOME/.ccache
@@ -55,9 +54,9 @@ jobs:
           set -e -o pipefail
           ./cruelbuild config                    \
                        model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
+                       name="S10S10Plus-V1.0"        \
                        toolchain=$TOOLCHAIN      \
-                       +magisk                   \
+                       +magisk=23.0                   \
                        +nohardening              \
                        +ttl                      \
                        +wireguard                \
@@ -126,7 +125,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: CruelKernel-${{ matrix.model }}
-          path: '*.img'
+          path: "*.img"
           if-no-files-found: error
 
       - name: Upload Kernel Info
