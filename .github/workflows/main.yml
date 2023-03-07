@@ -54,7 +54,7 @@ jobs:
           set -e -o pipefail
           ./cruelbuild config                    \
                        model=${{ matrix.model }} \
-                       name="S10S10Plus-V1.0"        \
+                       name="Mod By Daniel For S10andS10+"        \
                        toolchain=$TOOLCHAIN      \
                        +magisk=v23.0                   \
                        +nohardening              \
@@ -66,6 +66,7 @@ jobs:
                        +force_dex_wqhd           \
                        +morosound                \
                        +boeffla_wl_blocker       \
+                       +os_patch_level=2099-12
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
